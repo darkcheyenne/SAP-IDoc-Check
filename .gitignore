@@ -1,0 +1,6 @@
+ABAP_AS_WITH_POOL.jcoDestination
+ABAP_AS_WITHOUT_POOL.jcoDestination
+dist/*
+lib/sapjco3.dll
+lib/sapjco3.jar
+lib/sapjco3.pdb
