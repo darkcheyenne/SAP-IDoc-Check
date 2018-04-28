@@ -4,3 +4,7 @@ dist/*
 lib/sapjco3.dll
 lib/sapjco3.jar
 lib/sapjco3.pdb
+doc/.DS_Store
+build
+.DS_Store
+sapjco3.dll

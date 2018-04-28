@@ -50,7 +50,7 @@ public class ReadTable {
         jcoTableFields = jcoParameterList.getTable("FIELDS");
 
         jcoTableFields.appendRow();
-        jcoTableFields.setValue("FIELDNAME", "DOCNUM");
+        jcoTableFields.setValue("FIELDNAME", "STATYP");
         
         sdf = new SimpleDateFormat("yyyyMMdd");
         strDate = sdf.format(now);

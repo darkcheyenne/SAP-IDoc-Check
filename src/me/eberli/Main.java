@@ -11,6 +11,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -48,7 +49,7 @@ public class Main extends Application {
         scene = new Scene(new Group());
 
         // Konfiguration des Hauptfensters
-        primaryStage.setTitle("IDoc Check (Version 0.10)");
+        primaryStage.setTitle("IDoc Check (Version 0.11)");
         primaryStage.setWidth(535);
         primaryStage.setHeight(780);
 
@@ -57,7 +58,7 @@ public class Main extends Application {
         vbox.setSpacing(5);
         vbox.setPadding(new Insets(10, 0, 0, 10));
 
-        titelLabel = new Label("IDoc Check (Version 0.10)");
+        titelLabel = new Label("IDoc Check (Version 0.11)");
         titelLabel.setFont(new Font("Arial", 20));
 
         // Konfiguration der Log-Output-Box
@@ -83,6 +84,7 @@ public class Main extends Application {
 
         // Anzeigen des ganzen Fensters
         primaryStage.setScene(scene);
+        primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("bal.png")));
         primaryStage.show();
     }
 
@@ -92,12 +94,12 @@ public class Main extends Application {
 
         TableColumn systemNameCol = new TableColumn("System");
         systemNameCol.setCellValueFactory(new PropertyValueFactory<IDocStatus, String>("Systemname"));
-        TableColumn status30Col = new TableColumn("Status 30");
-        status30Col.setCellValueFactory(new PropertyValueFactory<IDocStatus, Integer>("NrOfIdocs"));
+        TableColumn status30Col = new TableColumn("Status 53");
+        status30Col.setCellValueFactory(new PropertyValueFactory<IDocStatus, Integer>("Status53"));
         TableColumn status64Col = new TableColumn("Status 64");
-        status64Col.setCellValueFactory(new PropertyValueFactory<IDocStatus, Integer>("NrOfOpenIdocs"));
+        status64Col.setCellValueFactory(new PropertyValueFactory<IDocStatus, Integer>("Status64"));
         iDocsPendingCol = new TableColumn("Warten auf Job");
-        iDocsPendingCol.setCellValueFactory(new PropertyValueFactory<IDocStatus, Integer>("PendingIdocs"));
+        iDocsPendingCol.setCellValueFactory(new PropertyValueFactory<IDocStatus, Integer>("PendingIDocs"));
 
         idocStatusTableView.getColumns().addAll(systemNameCol, status30Col, status64Col, iDocsPendingCol);
 
@@ -108,6 +110,7 @@ public class Main extends Application {
 
     private void updateData() {
         sapServerList.removeAll(sapServerList);
+        ConsoleLog.resetEventlog();
 
         sapServerList = Util.getDestinations();
 
@@ -116,6 +119,7 @@ public class Main extends Application {
             try {
                 currentNumer = ReadTable.rfcCountTableEDIDS_Stat(iDocStatus.getSystemname(), "STATUS = 53");
             } catch (JCoException ex) {
+                ConsoleLog.printEvent(ex.toString());
                 currentNumer = -2;
             }
             //currentNumer = 99;
@@ -127,6 +131,7 @@ public class Main extends Application {
             try {
                 currentNumer = ReadTable.rfcCountTableEDIDS_Stat(iDocStatus.getSystemname(), "STATUS = 64");
             } catch (JCoException ex) {
+                ConsoleLog.printEvent(ex.toString());
                 currentNumer = -2;
             }
             //currentNumer = 99;

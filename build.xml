@@ -50,4 +50,9 @@
     nbproject/build-impl.xml and nbproject/jfx-impl.xml.
 
     -->
+    <target name="-post-compile">
+        <copy file="ABAP_AS_WITHOUT_POOL.jcoDestination" todir="${dist.dir}"/>   
+        <copy file="ABAP_AS_WITH_POOL.jcoDestination" todir="${dist.dir}"/>    
+        <copy file="sapjco3.dll" todir="${dist.dir}"/>    
+    </target>
 </project>

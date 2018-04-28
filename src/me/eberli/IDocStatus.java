@@ -7,10 +7,9 @@ package me.eberli;
 public class IDocStatus {
 
     private String Systemname;
-    private Integer status53 = 0;
-    private Integer status64 = 0;
-
-    
+    private Integer Status53 = 0;
+    private Integer Status64 = 0;
+    private Integer PendingIDocs; //Dummy-Variable, wird nicht verwendet sondern aus der Differenz zwische Status 53 und 64 gebildet
     
     // GETTER und SETTER für Systemname
     public String getSystemname() {
@@ -23,24 +22,24 @@ public class IDocStatus {
 
     // GETTER und SETTER für Anzahl der IDocs mit Status 53
     public Integer getStatus53() {
-        return status53;
+        return Status53;
     }
 
     public void setStatus53(Integer NrOfIdocs) {
-        this.status53 = NrOfIdocs;
+        this.Status53 = NrOfIdocs;
     }
 
     // GETTER und SETTER für Anzahl der IDocs mit Status 64
     public Integer getStatus64() {
-        return status64;
+        return Status64;
     }
 
     public void setStatus64(Integer NrOfOpenIdocs) {
-        this.status64 = NrOfOpenIdocs;
+        this.Status64 = NrOfOpenIdocs;
     }
     
     // GETTER für Differenz zwischen IDocs mit Status 53 und 64
     public Integer getPendingIDocs(){
-        return status53 - status64;
+        return Status53 - Status64;
     }
 }

@@ -12,4 +12,8 @@ public class ConsoleLog {
     public static void printEvent(String newEntry){
         outputLog.setText(outputLog.getText() + newEntry + System.lineSeparator());
     }
+    
+    public static void resetEventlog(){
+        outputLog.setText("");
+    }
 }
